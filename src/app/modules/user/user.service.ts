@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import User from "./user.interface";
 import userModel from "./user.model";
 
@@ -39,10 +40,32 @@ const deleteSingleUserFromDB = async (userId: string) => {
     return result;
 }
 
+// Get total Price of orders
+const totalPriceOrder = async (userId: string) => {
+    const result = await userModel.aggregate([
+        {
+            $unwind: '$orders'
+        },
+        {
+            $match: { _id: new mongoose.Types.ObjectId(userId) }
+        },
+        {
+            $group: {
+                _id: "$username",
+                totalPrice: { $sum: "$orders.price" }
+            }
+        }
+    ])
+
+    // console.log(result)
+    return result;
+}
+
 export const userService = {
     createUserToDB,
     getAllUserFromDB,
     getSingleUserFromDB,
     updateSingleUserFromDB,
     deleteSingleUserFromDB,
+    totalPriceOrder,
 }
