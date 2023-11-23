@@ -59,10 +59,6 @@ const getSingleUser = async (req: Request, res: Response) => {
     }
 }
 
-
-
-
-
 // Get single user form db
 const DeleteSingleUser = async (req: Request, res: Response) => {
     try {
@@ -91,9 +87,39 @@ const DeleteSingleUser = async (req: Request, res: Response) => {
     }
 }
 
+// Update document
+const updateUser = async (req: Request, res: Response) => {
+    try {
+        const id: any = req.params.userId;
+        const user = await userService.getSingleUserFromDB(id)
+        if (user) {
+            const updateuserName = req.body.username;
+            const result = await userService.updateSingleUserFromDB(updateuserName, id)
+            res.status(200).json({
+                "success": true,
+                "message": "User updated successfully!",
+                data: result
+            })
+        }
+        else {
+            res.status(404).json({
+                "success": false,
+                "message": "user not found",
+            })
+        }
+    } catch (error) {
+        res.status(404).json({
+            success: false,
+            message: 'Something went wrong',
+            data: error
+        })
+    }
+}
+
 export const userController = {
     createUser,
     getAllUser,
     getSingleUser,
+    updateUser,
     DeleteSingleUser,
 }
