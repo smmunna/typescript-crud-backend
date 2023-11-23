@@ -5,7 +5,7 @@
    - https://dull-blue-slippers.cyclic.app/api/v1/users/1
 3. POST user
    - https://dull-blue-slippers.cyclic.app/api/v1/users
-   ```javascript
+   ```
    
   "success": true,
   "message": "User hasbeen created successfully",
