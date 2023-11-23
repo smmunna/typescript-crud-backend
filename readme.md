@@ -5,7 +5,7 @@
    - https://dull-blue-slippers.cyclic.app/api/v1/users/1
 3. POST user
    - https://dull-blue-slippers.cyclic.app/api/v1/users
-   ```
+   ```json
    
   "success": true,
   "message": "User hasbeen created successfully",
@@ -50,7 +50,7 @@
    ```
  4. Delete user
    - https://dull-blue-slippers.cyclic.app/api/v1/users/3
-   ```javascript
+   ```json
 
   "success": true,
   "message": "User deleted successfully!",
@@ -65,7 +65,7 @@
 
 6. Total Price
   - https://dull-blue-slippers.cyclic.app/api/v1/users/655efd86091703c5759a7b46/orders/total-price
-  ```javascript
+  ```json
   
   "success": true,
   "message": "Total price calculated successfully!",
