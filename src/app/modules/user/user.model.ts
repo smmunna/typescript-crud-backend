@@ -1,8 +1,9 @@
 import { Schema, model } from "mongoose";
 import User from "./user.interface";
+import bcrypt from "bcrypt"
 
 const userSchema = new Schema<User>({
-    userId: { type: Number, required: true },
+    userId: { type: Number, required: true, maxlength: 2 },
     username: { type: String, required: true },
     password: { type: String, required: true },
     fullName: {
@@ -25,6 +26,21 @@ const userSchema = new Schema<User>({
             quantity: { type: Number, required: true },
         },
     ],
+})
+
+// Hashing the password before saving user;
+userSchema.pre('save', async function (next) {
+    const user = this;
+    const saltRounds = 10;
+    user.password = await bcrypt.hash(user.password, saltRounds)
+
+    next()
+})
+
+//Hide the password after saving the user;
+userSchema.post('save', async function (doc, next) {
+    doc.password = ''
+    next()
 })
 
 const userModel = model<User>('user', userSchema)
