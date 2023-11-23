@@ -1,14 +1,14 @@
-interface User{
-    userId:number,
-    username:string,
-    password:string,
-    fullName:{
-        firstName:string,
-        lastName:string
+interface User {
+    userId: number,
+    username: string,
+    password: string,
+    fullName: {
+        firstName: string,
+        lastName: string
     },
-    age:number,
-    email:string,
-    isActive:boolean,
+    age: number,
+    email: string,
+    isActive: boolean,
     hobbies: string[];
     address: {
         street: string;
@@ -21,3 +21,5 @@ interface User{
         quantity: number;
     }[];
 }
+
+export default User;
